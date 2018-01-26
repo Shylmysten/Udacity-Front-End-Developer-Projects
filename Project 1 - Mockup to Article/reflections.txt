@@ -1,0 +1,25 @@
+You've learned a lot about web development so far. I want you to take a moment to write down your thoughts about web development here. Answer the following questions:
+  * What new skills have you learned?
+  * What has been easy?
+  * What has been difficult?
+  * How have you used the problem solving strategies from the first project to overcome challenges so far?
+
+---
+
+My Reflections so far?
+
+•	What new skills have you learned?
+
+Not being new to HTML and CSS, there is not much new here that I learned, however, I did have a couple refreshers on superscript and strikethroughs. I had forgotten about those tags because I had been doing the same thing for so long with CSS. I think the markup is the easiest part of it all, as sometimes CSS can get really tricky. It’s come a looooong ways from the early days.
+
+•	What has been easy?
+
+Up to this point, pretty much everything was easy for me. It was mostly refresher material for me, but it was kept interesting by the videos and the tree analogy. I was really hoping to learn some of the more advanced CSS topics.
+
+•	What has been difficult?
+
+I’ve not had arrived at anything in the course yet that I would really consider difficult or really challenging…key word, yet! Overall, I thought the courses were really taught well, and well structured.
+
+•	How have you used the problem-solving strategies from the first project to overcome challenges so far?
+
+Not, really…however, I did have slow myself down and really read what was being asked in some of the quizzes.
