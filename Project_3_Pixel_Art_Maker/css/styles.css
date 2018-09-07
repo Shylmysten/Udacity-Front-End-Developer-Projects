@@ -23,6 +23,7 @@ h2 {
 #canvasTitle {
   font-family: 'Architects Daughter', cursive;
   font-size: 2.25em;
+
 }
 
 h2:first-of-type {
@@ -74,7 +75,7 @@ input:focus {
   box-shadow: 0 0 5px #b9d4e9;
 }
 
-button {
+input[type=submit] {
   background: #57a9eb;
   border: 1px solid #326fa9;
   border-top-color: #3e80b1;
@@ -88,7 +89,7 @@ button {
   box-shadow: 0 1px 0 #bbb, 0 1px 0 #9cccf3 inset;
 }
 
-button:active {
+input:active[type=submit] {
   background: #3a76c4;
   box-shadow: none;
   text-shadow: 0 -1px 0 #1e3c5e;
@@ -96,30 +97,27 @@ button:active {
 
 div#subHeader {
   margin: 0 auto;
-  padding: 15px 30px 15px 30px;
+     padding:30px;
   height: 100px;
 }
 
 div#userInfo {
-  float: left;
+  float:left;
   padding-left: 29%;
 }
 
 div#size {
-  float: left;
+  float:left;
   margin-left: 40px;
 }
-
 div#fixed {
   position: fixed;
-  top: 10em;
-  right: 3em;
+      top: 10em;
+      right: 3em;
 }
-
 div#canvasContainer {
   width: 100%;
 }
-
 .clearfix {
-  clear: both;
+  clear:both;
 }

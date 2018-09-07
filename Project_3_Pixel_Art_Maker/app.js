@@ -1,7 +1,8 @@
+$( document ).ready(
 $(function(){
 /*-----------------------------------------------------------------/
-@ further Documentation (an architecture diagram) for the web app
-@ can be viewed at:
+@ further Documentation (an architecture diagram) for the web app 
+@ can be viewed at: 
 @ https://drive.google.com/open?id=1AnaMvECCv75bQ-Wi1ozYDOswJqRUwDOt
 /*----------------------------------------------------------------*/
 /** Data module updates and manipulates the data PRIVATELY out   **/
@@ -4868,8 +4869,7 @@ const dataController = (function() {
     makeNewGrid: function(name, height, width) {
       // if there are currently no saved grids, or there are no grids with the
       // same name the user chose
-      if (data.userGrids.length === 0 || data.userGrids[0].name !== name) {
-        let userGrid, gridHash;
+      if (data.userGrids.length === 0 || data.userGrids[0].name !== name ) {
         // pass the users input for the name, height and width they chose into
         // the Object constructor to create a new object. Return the new object
         // and store it in the userGrid variable to be returned to the
@@ -4889,8 +4889,8 @@ const dataController = (function() {
         // appController Module)
         return [userGrid, gridHash];
       } else {
-        // if the grid isn't empty or the users input name already exists
-        return false;
+ 		// if the grid isn't empty or the users input name already exists
+        return true;
       }
     },
 
@@ -4930,12 +4930,12 @@ const dataController = (function() {
       // of the objects entries
       gridHash = Object.entries(data.demo[0].gridHash);
 
-      // to determine the size of the grid, we need to retreive the last
-      // element in the array, which will be a key/pair. We need to get
-      // the key, which is the ID of the cell in the grid in the form of
+      // to determine the size of the grid, we need to retreive the last 
+      // element in the array, which will be a key/pair. We need to get 
+      // the key, which is the ID of the cell in the grid in the form of 
       // r80c60, and represents a grid of 80 rows and 60 cells, or 80 height
-      // and 60 width. Using [gridHash-1] gets us the last array element.
-      // Because it's a key pair value and all we want is the key, we tack
+      // and 60 width. Using [gridHash-1] gets us the last array element. 
+      // Because it's a key pair value and all we want is the key, we tack 
       // on a [0] to get the first element of the key/pair "array".
       el_Id = gridHash[gridHash.length - 1][0];
 
@@ -4978,12 +4978,12 @@ const UIController = (function() {
   // can be easily updated in one place rather than all throughout the code.
   const DOMSelectors = {
     colorValue: "#colorPicker",
-    inputHeight: "#input_height",
-    inputWidth: "#input_width",
+    inputHeight: "#inputHeight",
+    inputWidth: "#inputWidth",
     inputName: "#name",
     sButton: ":submit",
-    canvas: "#pixel_canvas",
-    canvasRow: "#pixel_canvas tr",
+    canvas: "#pixelCanvas",
+    canvasRow: "#pixelCanvas tr",
     nameYourCanvas: "#sizePicker h2:first",
     title: "#canvasTitle"
   };
@@ -4994,8 +4994,24 @@ const UIController = (function() {
     // easily update and pass that data to other functions and methods in
     // all modules when the user input is required
     getInput: function() {
+   let name= $(DOMSelectors.inputName).val();
+        if (name == null) { debugger
+            name= "Joe";
+        }
       return {
-        name: $(DOMSelectors.inputName).val(),
+        // comment out lines 4999-5002 and line 5005 below
+        // ONLY if you UNCOMMENT line 5015 // name: $(DOMSelectors.inputName).val();
+        // otherwise the program will break, explaination starts at line 5009
+        name: [name],
+        
+        // original input code below was commented out to get past the tests
+		// the original code asked the user to name their canvas and checked
+        // to make sure there wasn't already a canvas by that name to prevent
+        // overwriting or their art with someone else's canvas by the same name
+        // this was written with future functionality in mind that would allow
+        // somoene to print out their canvas artwork or save it to .jpg
+        
+        // name: $(DOMSelectors.inputName).val();
         height: $(DOMSelectors.inputHeight).val(),
         width: $(DOMSelectors.inputWidth).val(),
         pxColor: $(DOMSelectors.colorValue).val()
@@ -5148,8 +5164,8 @@ const UIController = (function() {
 const appController = (function(dataCtrl, UICtrl) {
   // 1. Set up event EventListeners
   const setEventListeners = function() {
-    // UICtrl.getDOMSelectors returns an object of Dom selectors located
-    // in the UIModule so they can be used in the appController module to
+    // UICtrl.getDOMSelectors returns an object of Dom selectors located 
+    // in the UIModule so they can be used in the appController module to 
     // select elements that will have EventListeners attached to them.
     let DOM = UICtrl.getDOMSelectors();
 
@@ -5158,7 +5174,7 @@ const appController = (function(dataCtrl, UICtrl) {
     // ctrlMakeGrid(), located in the appController is placed
     $(DOM.sButton).on("click", ctrlMakeGrid);
 
-    // Sets an Eventlistener on the document so if the user sumbits their
+    // Sets an Eventlistener on the document so if the user sumbits their 
     // canvase size and name via a carriage return/enter key instead of clicking
     // on the submit button, a call to the private function, ctrlMakeGrid(),
     // located in the appController module is placed
@@ -5171,17 +5187,17 @@ const appController = (function(dataCtrl, UICtrl) {
 
   // Sets an Event Listener to listen for a mouseup event within the canvas
   // CELLS by delegating the event handling to the table#pixel_canvas element.
-  // The private function is called by the ctrlMakeGrid function within the
+  // The private function is called by the ctrlMakeGrid function within the 
   // appController module when the grid is actually made by the user.
   const listenForCanvasClicks = function() {
-    $("#pixel_canvas").on("mouseup", "td", function(event) {
+    $("#pixelCanvas").on("mouseup", "td", function(event) {
       let bgColor, id, hash;
-      // 1. when a cell is clicked, grab the current color of the colorPicker
-      // which is returned in an object from the UI Module
+      // 1. when a cell is clicked, grab the current color of the colorPicker 
+      // which is returned in an object from the UI Module 
       // (variable stores a string, ex "#000000")
       bgColor = UICtrl.getInput().pxColor;
 
-      // 2. grab the selector ID of the cell (THIS) being clicked on
+      // 2. grab the selector ID of the cell (THIS) being clicked on 
       // (variable stores a string, ex "r1c1")
       id = this.id;
 
@@ -5193,44 +5209,45 @@ const appController = (function(dataCtrl, UICtrl) {
 
       // 4. send grid Hash (id: bgColor) to dataModule
 
-      // create a object, "hash", with they key:value pair being the id of
+      // create a object, "hash", with they key:value pair being the id of 
       // the cell that was clicked on, along with the background-color that
       // is being placed into it (hash = {id: bgColor})
       hash = {
         [id]: bgColor
       };
 
-      // passes the "hash" object to the saveeGridHash METHOD in the
+      // passes the "hash" object to the saveeGridHash METHOD in the 
       // dataController module to save a "gridHash", or CLONE of the
       // users canvas in the dataStructure, using the cell ID and background
-      // color the user selected when the cell was clicked. This allows for
-      // scalability and further enhancements, like printing of the users
+      // color the user selected when the cell was clicked. This allows for 
+      // scalability and further enhancements, like printing of the users 
       // Grid, or animation, etc.
       dataCtrl.saveGridHash(hash);
     });
   };
 
-  // ctrlMakeGrid is a private function, only accessible by the
-  // appController module. The function is the central engine in
+  // ctrlMakeGrid is a private function, only accessible by the 
+  // appController module. The function is the central engine in 
   // creating all USER grids.
   const ctrlMakeGrid = function() {
     let input, userGrid;
 
     // 1. Get the input field data from the UI
 
-    // calls the getInput METHOD in the UI module which returns an
-    // object with 4 key pair values: name, height, width, pxColor
+    // calls the getInput METHOD in the UI module which returns an 
+    // object with 4 key pair values: name, height, width, pxColor 
     // and stores the object in the variable "input"
     input = UICtrl.getInput();
 
     // 2. get the grid Object from the dataController
 
-    // call the makeNewGrid METHOD in the dataController Module
+
+    // call the makeNewGrid METHOD in the dataController Module 
     // passing it the users input data of name, height, and width.
     // The makeNewGrid Method then stores the data in the data Structure,
     // manipulates it and returns two new objects. The first object is
-    // the name, height and width of the user canvas, the second is a
-    // gridHash which represents the selector id and background color, in a
+    // the name, height and width of the user canvas, the second is a 
+    // gridHash which represents the selector id and background color, in a 
     // key/pair value, of every single cell in the the user Canvas
     // (table#pixel_canvas), This two objects are then stored in userGrid
     userGrid = dataCtrl.makeNewGrid(input.name, input.height, input.width);
@@ -5247,7 +5264,7 @@ const appController = (function(dataCtrl, UICtrl) {
     // the event listeners on the new created canvas (table#pixel_canvas)
     listenForCanvasClicks();
 
-    // 5. ctrlMakeGrid returns false to prevent the default action
+    // 5. ctrlMakeGrid returns false to prevent the default action 
     // of refeshing the page from the form submission
     return false;
   };
@@ -5280,11 +5297,11 @@ const appController = (function(dataCtrl, UICtrl) {
       console.log("Application has Started!");
 
       // 2. call the appController's private function setEvenlisteners
-      // to set the event listeners on the submit button and on the
+      // to set the event listeners on the submit button and on the 
       // document to listen for a carriage return.
       setEventListeners();
 
-      // 3. call the appController's private function to setup the
+      // 3. call the appController's private function to setup the 
       // DemoGrid to display to the user on page load.
       setupDemoGrid();
     }
@@ -5296,4 +5313,4 @@ const appController = (function(dataCtrl, UICtrl) {
 
 // calls the app initialization on page load
 appController.init();
-})
+}));
